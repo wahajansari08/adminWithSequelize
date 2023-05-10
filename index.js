@@ -1,3 +1,4 @@
+require("./models");
 const express = require("express");
 const app = express();
 
@@ -5,7 +6,7 @@ const app = express();
 require("./models");
 
 app.get("/", (req, res) => {
-  res.send("Response");
+  res.send("Test response");
 });
 
 app.listen("3000", () => {

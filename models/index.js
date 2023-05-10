@@ -1,9 +1,9 @@
-const { Sequelize } = require("sequelize");
+const { Sequelize, DataTypes, Model } = require("sequelize");
 
 const sequelize = new Sequelize("e_comm", "wahaj", "0909", {
   host: "localhost",
-  dialect:
-    "mysql" /* one of  | 'postgres' | 'sqlite' | 'mariadb' | 'mssql' | 'db2' | 'snowflake' | 'oracle' */,
+  // logging: "true",
+  dialect: "mysql",
 });
 
 try {
@@ -12,3 +12,12 @@ try {
 } catch (error) {
   console.error("Unable to connect to the database:", error);
 }
+
+const db = {};
+db.Sequelize = Sequelize;
+db.sequelize = sequelize;
+
+db.admin = require("./admin")(sequelize, DataTypes, Model);
+
+db.sequelize.sync({ force: true });
+module.exports = db;
